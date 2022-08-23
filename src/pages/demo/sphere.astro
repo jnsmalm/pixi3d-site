@@ -1,0 +1,11 @@
+---
+import Demo from "../../layouts/Demo.astro";
+---
+
+<script>
+  import { Sphere } from "../../demo/sphere";
+  import { Loader } from "../../scripts/loader";
+  Loader.load(new Sphere(document.getElementById("demo") as HTMLCanvasElement));
+</script>
+
+<Demo title="Sphere" />
