@@ -2,14 +2,15 @@
 export interface Props {
 	title: string;
 	href: string;
+	image: string;
 }
 
-const { href, title } = Astro.props as Props;
+const { href, title, image } = Astro.props as Props;
 ---
 
 <div class="mb-8 break-inside-avoid hover:scale-105 transition-all">
 	<a href={href}>
-		<div class="w-full aspect-video bg-blue-200 mb-2 rounded"></div>
+		<img src={image} class="w-full aspect-video mb-2 rounded" />
 		<div class="text-center">
 			{title}
 		</div>

@@ -1,0 +1,26 @@
+---
+import Demo from "../../layouts/Demo.astro";
+---
+
+<script>
+  import { DancingStormtrooper } from "../../demo/dancing-stormtrooper";
+  import { Loader } from "../../scripts/loader";
+  Loader.load(
+    new DancingStormtrooper(
+      document.getElementById("demo") as HTMLCanvasElement
+    )
+  );
+</script>
+
+<Demo
+  title="Dancing stormtrooper"
+  image="/images/dancing-stormtrooper.png"
+  description=""
+>
+  <a
+    href="https://sketchfab.com/3d-models/dancing-stormtrooper-12bd08d66fe04a84be446e583d6663ac"
+    >Model created by StrykerDoesAnimation.
+  </a> License: <a href="https://creativecommons.org/licenses/by/4.0/"
+    >CC Attribution
+  </a>
+</Demo>

@@ -1,12 +1,14 @@
 ---
 import Card from "../components/Card.astro";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <script>
+	import { DancingStormtrooper } from "../demo/dancing-stormtrooper";
 	import { Loader } from "../scripts/loader";
-	import { Cube } from "../demo/cube";
 	Loader.load(
-		new Cube(
+		new DancingStormtrooper(
 			document.getElementById("demo") as HTMLCanvasElement,
 			document.getElementById("demo-container") as HTMLElement
 		)
@@ -17,7 +19,18 @@ import Card from "../components/Card.astro";
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="viewport" content="width=device-width" />
 <meta name="generator" content={Astro.generator} />
-<title>Astro</title>
+<meta
+	property="og:title"
+	content="Pixi3D - The 3D renderer for PixiJS. Seamless integration with 2D
+applications."
+/>
+<meta property="og:image" content="" />
+<meta property="og:description" content="" />
+<meta property="og:url" content={canonicalURL} />
+<title>
+	Pixi3D - The 3D renderer for PixiJS. Seamless integration with 2D
+	applications.
+</title>
 
 <body>
 	<div class="container mx-auto px-4 py-4">
@@ -36,11 +49,15 @@ import Card from "../components/Card.astro";
 		</div>
 		<div class="columns-3xs gap-8">
 			<div>
-				<Card title="Demo" href="/demo/sphere" />
-				<Card title="Demo" href="/" />
-				<Card title="Demo" href="/" />
-				<Card title="Demo" href="/" />
-				<Card title="Demo" href="/" />
+				<Card
+					title="Dancing stormtrooper"
+					href="/demo/dancing-stormtrooper"
+					image="/images/dancing-stormtrooper-card.png"
+				/>
+				<Card title="Demo" href="/" image="" />
+				<Card title="Demo" href="/" image="" />
+				<Card title="Demo" href="/" image="" />
+				<Card title="Demo" href="/" image="" />
 			</div>
 		</div>
 	</div>
