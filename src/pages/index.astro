@@ -5,10 +5,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <script>
-	import { DancingStormtrooper } from "../demo/dancing-stormtrooper";
+	import { Logo } from "../demo/logo";
 	import { Loader } from "../scripts/loader";
 	Loader.load(
-		new DancingStormtrooper(
+		new Logo(
 			document.getElementById("demo") as HTMLCanvasElement,
 			document.getElementById("demo-container") as HTMLElement
 		)
@@ -32,22 +32,22 @@ applications."
 	applications.
 </title>
 
-<body>
+<body class="bg-gray-300">
 	<div class="container mx-auto px-4 py-4">
-		<div class="container bg-red-300">
+		<div class="container">
 			<div id="demo-container" class="container relative h-64 z-10">
 				<canvas id="demo" class="w-full"></canvas>
 			</div>
-			<div class="text-center relative bottom-10 z-20">
+			<div class="text-center relative bottom-14 z-20 font-sans font-bold text-2xl">
 				The 3D renderer for PixiJS. Seamless integration with 2D applications.
 			</div>
 		</div>
-		<div class="flex justify-center gap-4 mt-4 mb-4">
-			<div class="w-24 bg-red-100 p-4">Get started</div>
-			<div class="w-24 bg-red-200 p-4">API</div>
-			<div class="w-24 bg-red-300 p-4">GitHub</div>
+		<div class="flex justify-center gap-4 mb-16 text-gray-300">
+			<div class="w-36 bg-zinc-800 p-2 rounded-lg text-center uppercase">Get started</div>
+			<div class="w-36 bg-zinc-800 p-2 rounded-lg text-center uppercase">API</div>
+			<div class="w-36 bg-zinc-800 p-2 rounded-lg text-center uppercase">GitHub</div>
 		</div>
-		<div class="columns-3xs gap-8">
+		<div class="columns-3xs gap-8 center">
 			<div>
 				<Card
 					title="Dancing stormtrooper"
