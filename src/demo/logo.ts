@@ -1,6 +1,6 @@
 import { Application } from "pixi.js";
 import { Camera, Color, Container3D, Cubemap, glTFAsset, ImageBasedLighting, Light, LightingEnvironment, LightType, Mesh3D, Model, StandardMaterial, Vec3 } from "pixi3d";
-import { Trail, TrailRenderer } from "./trail-renderer";
+import { Trail, TrailRenderer } from "../components/TrailRenderer";
 
 export class Logo {
   private _app: Application

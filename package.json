@@ -4,15 +4,20 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
+    "start": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sounds": "audiosprite -f howler -e ogg,m4a -o ./public/sounds/desert-racing ./sounds/desert-racing/*"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^1.0.0",
+    "@types/howler": "^2.2.7",
     "astro": "^1.0.7",
+    "audiosprite": "^0.7.2",
+    "gsap": "^3.11.0",
+    "howler": "^2.2.3",
     "pixi.js": "^6.5.1",
-    "pixi3d": "^1.6.1"
+    "pixi3d": "^1.6.2"
   }
 }

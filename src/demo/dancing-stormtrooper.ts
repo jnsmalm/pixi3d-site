@@ -19,9 +19,9 @@ export class DancingStormtrooper {
     this._app.loader.add(
       "dancing-stormtrooper", "/models/dancing-stormtrooper.glb")
     this._app.loader.add(
-      "photo-studio-diffuse", "/photo-studio/diffuse.cubemap")
+      "photo-studio-diffuse", "/environments/photo-studio/diffuse.cubemap")
     this._app.loader.add(
-      "photo-studio-specular", "/photo-studio/specular.cubemap")
+      "photo-studio-specular", "/environments/photo-studio/specular.cubemap")
 
     return new Promise<void>(resolve => {
       this._app.loader.load(() => {
