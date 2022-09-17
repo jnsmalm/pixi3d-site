@@ -45,8 +45,8 @@ export class AudioPlayer {
       if (!loop) delete this.playing[name]
     }, id)
     this.howl.loop(loop, id)
-    this.howl.volume(volume * this.masterVolume, id)
     this.playing[name] = { id, muteOnBlur, volume }
+    this.setVolume(name, volume)
   }
 
   setVolume(name: string, volume: number) {
