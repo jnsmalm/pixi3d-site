@@ -28,6 +28,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 	</head>
 	<body>
 		<canvas id="demo" class="fixed"></canvas>
+		<slot name="overlay" />
 		<a
 			class="absolute top-0 right-0 h-10 w-10 bg-slate-700 text-white m-4 flex justify-center items-center rounded cursor-pointer"
 			href="/"
@@ -45,9 +46,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 			</svg>
 		</a>
 		<div
-			class="absolute inset-x-0 bottom-0 flex justify-center items-center pb-4 text-sm"
+			class="absolute inset-x-0 bottom-0 flex justify-center items-center pb-4 text-sm text-center"
 		>
-			<slot />
+			<slot name="license"/>
 		</div>
 		<div
 			id="load"
