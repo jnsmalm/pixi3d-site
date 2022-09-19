@@ -1,0 +1,35 @@
+---
+import Demo from "../../layouts/Demo.astro";
+---
+
+<script>
+  import { WalrusCave } from "../../demo/walrus-cave";
+  import { Loader } from "../../scripts/loader";
+  Loader.load(
+    new WalrusCave(document.getElementById("demo") as HTMLCanvasElement)
+  );
+</script>
+
+<Demo
+  title="Walrus cave"
+  image="/images/dancing-stormtrooper.png"
+  description=""
+>
+  <div slot="license">
+    Models from <a
+      href="https://sketchfab.com/3d-models/walrus-cave-691f94c653b242f1a172ba018b4e6318"
+      >rosiejarvis</a
+    >, <a
+      href="https://sketchfab.com/3d-models/l-p-shark-cage-diving-scene-5bf4fcbbc6ea40b69c734f54180fa38c"
+      >EdwinRC</a
+    >, <a
+      href="https://sketchfab.com/3d-models/sea-keep-lonely-watcher-09a15a0c14cb4accaf060a92bc70413d"
+      >Artjoms Horosilovs</a
+    > and <a
+      href="https://sketchfab.com/3d-models/stylized-crate-537ae14262ad4327b2f9405d27a37b3b"
+      >Berty56</a
+    >. License: <a href="https://creativecommons.org/licenses/by/4.0/"
+      >CC Attribution</a
+    >
+  </div>
+</Demo>
