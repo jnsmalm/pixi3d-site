@@ -1,0 +1,101 @@
+---
+import Demo from "../../layouts/Demo.astro";
+---
+
+<script>
+  import { PinkCube } from "../../demo/pink-cube";
+  import { Loader } from "../../scripts/loader";
+  Loader.load(
+    new PinkCube(document.getElementById("demo") as HTMLCanvasElement)
+  );
+</script>
+
+<Demo title="Pink cube" image="/images/dancing-stormtrooper.png" description="">
+  <div
+    slot="overlay"
+    class="absolute bottom-0 left-0 flex justify-center items-end w-full h-full transition-opacity"
+    id="controls"
+  >
+    <div id="refresh" class="button absolute top-0 left-0 m-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 32 32"
+        stroke-opacity="0.4"
+        class="refresh"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+        ></path>
+      </svg>
+    </div>
+
+    <div class="flex flex-col justify-center items-center mb-4">
+      <div id="up" class="button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+      </div>
+
+      <div class="flex flex-rows">
+        <div id="left" class="button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+        </div>
+
+        <div id="down" class="button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+        </div>
+
+        <div id="right" class="button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .button {
+      cursor: pointer;
+      width: 12vh;
+      height: 12vh;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .button:active {
+      transform: scale(0.9);
+    }
+    .button svg {
+      fill: transparent;
+      stroke-width: 1.5;
+      stroke: white;
+      stroke-opacity: 0.2;
+    }
+    .button svg.refresh {
+      stroke-opacity: 0.6;
+    }
+  </style>
+</Demo>
