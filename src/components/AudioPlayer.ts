@@ -38,8 +38,12 @@ export class AudioPlayer {
     })
   }
 
+  isPlaying(name: string) {
+    return this.playing[name] !== undefined
+  }
+
   play(name: string, options: AudioPlayOptions = {}) {
-    let { loop = false, volume = 1, muteOnBlur = false } = options
+    let { loop = false, volume = 1, muteOnBlur = true } = options
     let id = this.howl.play(name)
     this.howl.on("end", () => {
       if (!loop) delete this.playing[name]
@@ -47,6 +51,12 @@ export class AudioPlayer {
     this.howl.loop(loop, id)
     this.playing[name] = { id, muteOnBlur, volume }
     this.setVolume(name, volume)
+  }
+
+  setRate(name: string, rate: number) {
+    if (this.playing[name]) {
+      this.howl.rate(rate, this.playing[name].id)
+    }
   }
 
   setVolume(name: string, volume: number) {

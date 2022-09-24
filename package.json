@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "sounds": "audiosprite -f howler -e ogg,m4a -o ./public/sounds/pink-cube ./sounds/pink-cube/*"
+    "sounds": "audiosprite -f howler -e ogg,m4a -o ./public/sounds/desert-racing ./sounds/desert-racing/*"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^1.0.0",

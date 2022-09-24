@@ -1,0 +1,44 @@
+{
+  "urls": [
+    "./public/sounds/desert-racing.ogg",
+    "./public/sounds/desert-racing.m4a"
+  ],
+  "sprite": {
+    "car_acc_1": [
+      0,
+      1874.9886621315193
+    ],
+    "car_acc_2": [
+      3000,
+      3187.5056689342405
+    ],
+    "car_rev_1": [
+      8000,
+      1437.5283446712021
+    ],
+    "car_skid_loop_1": [
+      11000,
+      1000
+    ],
+    "car_skid_loop_2": [
+      13000,
+      529.1609977324256
+    ],
+    "car_skid_loop_3": [
+      15000,
+      1000
+    ],
+    "car_skid_loop_4": [
+      17000,
+      1000
+    ],
+    "car_skid_loop_5": [
+      19000,
+      529.1836734693867
+    ],
+    "engine_loop": [
+      21000,
+      2500
+    ]
+  }
+}

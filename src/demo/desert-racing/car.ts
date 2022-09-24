@@ -3,6 +3,7 @@ import type { Howl } from "howler";
 import { Texture } from "pixi.js";
 import { Camera, Container3D, glTFAsset, Model, ObservablePoint3D, StandardMaterial, Vec3 } from "pixi3d";
 import { AudioPlayer } from "../../components/AudioPlayer";
+import { Random } from "../../components/Random";
 import type { Trail, TrailRenderer } from "../../components/TrailRenderer";
 import { Config } from "./config";
 import type { DustParticleSystem } from "./dust-particles";
@@ -20,7 +21,8 @@ export class Car extends Container3D {
   private lastPositionWheel1?: Float32Array
   private lastPositionWheel2?: Float32Array
   private _accelerate = false
-  private audioPlayer?: AudioPlayer
+  private playingSkidSound?: string
+  protected audioPlayer?: AudioPlayer
 
   static MIN_SPEED = 0.002
   static MAX_SPEED = 0.012
@@ -40,7 +42,10 @@ export class Car extends Container3D {
       this.audioPlayer = new AudioPlayer(howl)
       this.audioPlayer.play("car_skid_loop_1", { loop: true, volume: 0, muteOnBlur: true })
       this.audioPlayer.play("car_skid_loop_2", { loop: true, volume: 0, muteOnBlur: true })
-      this.audioPlayer.play("engine_loop", { loop: true, volume: 1, muteOnBlur: true })
+      this.audioPlayer.play("car_skid_loop_3", { loop: true, volume: 0, muteOnBlur: true })
+      this.audioPlayer.play("car_skid_loop_4", { loop: true, volume: 0, muteOnBlur: true })
+      this.audioPlayer.play("car_skid_loop_5", { loop: true, volume: 0, muteOnBlur: true })
+      this.audioPlayer.play("engine_loop", { loop: true, volume: 0.5, muteOnBlur: true })
       this.audioPlayer.masterVolume = 0
     }
   }
@@ -66,6 +71,10 @@ export class Car extends Container3D {
 
   get laps() {
     return this._laps
+  }
+
+  resetLaps() {
+    this._laps = 0
   }
 
   setPositionAtTrackDistance(track: Track) {
@@ -156,8 +165,22 @@ export class Car extends Container3D {
     this.lastPositionWheel1 = Vec3.copy(behindWheel1)
     this.lastPositionWheel2 = Vec3.copy(behindWheel2)
 
-    this.audioPlayer?.setVolume("car_skid_loop_1", Math.abs(slideValue) * 0.5)
-    this.audioPlayer?.setVolume("car_skid_loop_2", Math.abs(slideValue) * 0.5)
+    // this.audioPlayer?.setVolume("car_skid_loop_1", Math.abs(slideValue) * 0.3)
+    // this.audioPlayer?.setVolume("car_skid_loop_2", Math.abs(slideValue) * 0.3)
+
+    if (this.playingSkidSound === undefined) {
+      this.playingSkidSound = [
+        "car_skid_loop_3",
+        "car_skid_loop_4",
+        "car_skid_loop_5"
+      ][Random.integer(0, 2)]
+    }
+    if (this.playingSkidSound) {
+      this.audioPlayer?.setVolume(this.playingSkidSound, Math.abs(slideValue) * 1)
+    }
+    if (Math.abs(slideValue) < 0.1) {
+      this.playingSkidSound = undefined
+    }
 
     if (Math.abs(slideValue) > 0.2) {
       if (!this.currentTrail1 || !this.currentTrail2) {
@@ -215,6 +238,9 @@ export class Car extends Container3D {
       return v0 * (1 - t) + v1 * t
     }
     this.speed = lerp(this.minSpeed, this.maxSpeed, this.speedPercent)
+
+    this.audioPlayer?.setRate("engine_loop", 1 + this.speedPercent * 0.3)
+    this.audioPlayer?.setVolume("engine_loop", 0.5 - this.speedPercent * 0.25)
   }
 
   setSlideOffset(track: Track) {

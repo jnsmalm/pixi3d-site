@@ -1,8 +1,23 @@
+import type { Howl } from "howler";
+import type { TrailRenderer } from "../../components/TrailRenderer";
 import { Car } from "./car";
+import type { DustParticleSystem } from "./dust-particles";
 import type { Track } from "./track";
 
 export class CpuCar extends Car {
   playerCarTotalDistance = 0
+
+  constructor(trailRenderer: TrailRenderer, offset: number, particleSystem: DustParticleSystem, howl?: Howl) {
+    super(trailRenderer, offset, particleSystem, () => { }, howl)
+  }
+
+  setMasterVolume() {
+    super.setMasterVolume()
+    if (!this.audioPlayer) {
+      return
+    }
+    this.audioPlayer.masterVolume = this.audioPlayer.masterVolume * 0.5
+  }
 
   easeIntoCurves(track: Track) {
     let currentCurve = track.getCurveAtDistance(this.lapDistance, { curveStartsAtDistance: 0 })

@@ -64,20 +64,40 @@ export class RetroRacing {
         "/sounds/desert-racing.m4a"
       ],
       "sprite": {
-        "car_rev_1": [
+        "car_acc_1": [
           0,
-          1437.5283446712017
+          1874.9886621315193
+        ],
+        "car_acc_2": [
+          3000,
+          3187.5056689342405
+        ],
+        "car_rev_1": [
+          8000,
+          1437.5283446712021
         ],
         "car_skid_loop_1": [
-          3000,
+          11000,
           1000
         ],
         "car_skid_loop_2": [
-          5000,
-          529.1609977324265
+          13000,
+          529.1609977324256
+        ],
+        "car_skid_loop_3": [
+          15000,
+          1000
+        ],
+        "car_skid_loop_4": [
+          17000,
+          1000
+        ],
+        "car_skid_loop_5": [
+          19000,
+          529.1836734693867
         ],
         "engine_loop": [
-          7000,
+          21000,
           2500
         ]
       }
@@ -90,7 +110,7 @@ export class RetroRacing {
     this.playerCar = this.app.stage.addChild(new Car(this.trailRenderer, +0.75,
       this.particleSystem, (lap) => { this.onLapComplete(lap) }, this.howl))
     this.cpuCar = this.app.stage.addChild(new CpuCar(
-      this.trailRenderer, -0.75, this.particleSystem, () => { }))
+      this.trailRenderer, -0.75, this.particleSystem, this.howl))
     this.control = new CameraOrbitControl(this.app.renderer.view)
     this.editor = this.app.stage.addChild(new Editor(this.control))
 
@@ -243,7 +263,9 @@ export class RetroRacing {
     this.cpuCar.totalDistance = this.track.totalDistance - 1.5
     this.cpuCar.accelerate = false
     this.playerCar.lapDistance = - 1.5
+    this.playerCar.resetLaps()
     this.cpuCar.lapDistance = - 1.5
+    this.cpuCar.resetLaps()
     this.lapCounter.reset()
     this.lapCounter.visible = true
   }
