@@ -14,6 +14,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap"
+		/>
 		<meta
 			name="viewport"
 			content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
@@ -24,7 +29,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 		<meta property="og:image" content={image} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonicalURL} />
-		<title>{title}</title>
+		<title>{title} - Pixi3D</title>
 	</head>
 	<body>
 		<canvas id="demo" class="fixed"></canvas>
@@ -48,7 +53,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 		<div
 			class="absolute inset-x-0 bottom-0 flex justify-center items-center text-sm text-center p-4"
 		>
-			<slot name="license"/>
+			<slot name="license" />
 		</div>
 		<div
 			id="load"

@@ -15,74 +15,95 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 	);
 </script>
 
-<meta charset="utf-8" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<meta name="viewport" content="width=device-width" />
-<meta name="generator" content={Astro.generator} />
-<meta
-	property="og:title"
-	content="Pixi3D - The 3D renderer for PixiJS. Seamless integration with 2D
-applications."
-/>
-<meta property="og:image" content="" />
-<meta property="og:description" content="" />
-<meta property="og:url" content={canonicalURL} />
-<title>
-	Pixi3D - The 3D renderer for PixiJS. Seamless integration with 2D
-	applications.
-</title>
-
-<body class="bg-gray-300">
-	<div class="container mx-auto px-4 py-4">
-		<div class="container">
-			<div id="demo-container" class="container relative h-64 z-10">
-				<canvas id="demo" class="w-full"></canvas>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap"
+		/>
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta
+			property="og:title"
+			content="Pixi3D - The 3D renderer for PixiJS. Seamless integration with 2D
+		applications."
+		/>
+		<meta property="og:image" content="" />
+		<meta property="og:description" content="" />
+		<meta property="og:url" content={canonicalURL} />
+		<title>
+			Pixi3D - The 3D renderer for PixiJS. Seamless integration with 2D
+			applications.
+		</title>
+	</head>
+	<body class="bg-cccccc">
+		<div class="container mx-auto max-w-5xl px-4 py-4">
+			<div class="container">
+				<!-- <div id="demo-container" class="container relative h-64 z-10">
+					<canvas id="demo" class="w-full"></canvas>
+				</div> -->
+				<h1 class="text-5xl font-semibold text-center m-6">Pixi3D</h1>
+				<div
+					class="max-w-lg mx-auto text-center relative z-20 font-sans font-medium text-3xl mb-10"
+				>
+					The 3D renderer for PixiJS. Seamless integration with 2D applications.
+				</div>
 			</div>
-			<div
-				class="text-center relative bottom-14 z-20 font-sans font-bold text-2xl"
-			>
-				The 3D renderer for PixiJS. Seamless integration with 2D applications.
+			<div class="flex justify-center gap-4 mb-12 text-white">
+				<a
+					href="https://github.com/jnsmalm/pixi3d#getting-started"
+					class="w-40 bg-333333 hover:bg-555555 py-1 px-4 flex justify-center items-center rounded-full text-center uppercase"
+				>
+					Get started
+				</a>
+				<a
+					href="https://api.pixi3d.org/"
+					class="w-40 bg-333333 hover:bg-555555 py-1 px-4 flex justify-center items-center rounded-full text-center uppercase"
+				>
+					API
+				</a>
+				<a
+					href="https://github.com/jnsmalm/pixi3d"
+					class="w-40 bg-333333 hover:bg-555555 py-1 px-4 flex justify-center items-center rounded-full text-center uppercase"
+				>
+					GitHub
+				</a>
+			</div>
+			<div class="columns-3xs gap-8">
+				<div>
+					<Card
+						title="Desert racing"
+						href="/demo/desert-racing"
+						image="/images/desert-racing-card.jpg"
+						square={true}
+					/>
+					<Card
+						title="Walrus cave"
+						href="/demo/walrus-cave"
+						image="/images/walrus-cave-card.jpg"
+					/>
+					<Card
+						title="Pink cube"
+						href="/demo/pink-cube"
+						image="/images/pink-cube-card.jpg"
+					/>
+					<Card
+						title="Shattering statue"
+						href="/demo/shattering-statue"
+						image="/images/shattering-statue-card.jpg"
+						square={true}
+					/>
+					<Card
+						title="Dancing stormtrooper"
+						href="/demo/dancing-stormtrooper"
+						image="/images/dancing-stormtrooper-card.jpg"
+					/>
+				</div>
 			</div>
 		</div>
-		<div class="flex justify-center gap-4 mb-16 text-gray-300">
-			<div class="w-36 bg-zinc-800 p-2 rounded-lg text-center uppercase">
-				Get started
-			</div>
-			<div class="w-36 bg-zinc-800 p-2 rounded-lg text-center uppercase">
-				API
-			</div>
-			<div class="w-36 bg-zinc-800 p-2 rounded-lg text-center uppercase">
-				GitHub
-			</div>
-		</div>
-		<div class="columns-3xs gap-8 max-w-4xl mx-auto">
-			<div>
-				<Card
-					title="Dancing stormtrooper"
-					href="/demo/dancing-stormtrooper"
-					image="/images/dancing-stormtrooper-card.png"
-				/>
-				<Card
-					title="Shattering statue"
-					href="/demo/shattering-statue"
-					image="/images/dancing-stormtrooper-card.png"
-				/>
-				<Card
-					title="Desert racing"
-					href="/demo/desert-racing"
-					image="/images/dancing-stormtrooper-card.png"
-				/>
-				<Card
-					title="Walrus cave"
-					href="/demo/walrus-cave"
-					image="/images/dancing-stormtrooper-card.png"
-				/>
-				<Card
-					title="Pink cube"
-					href="/demo/pink-cube"
-					image="/images/dancing-stormtrooper-card.png"
-				/>
-			</div>
-		</div>
-	</div>
-</body>
+	</body>
+</html>

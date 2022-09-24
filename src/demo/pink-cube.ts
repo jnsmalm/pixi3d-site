@@ -8,7 +8,7 @@ import { Map } from "./pink-cube/map";
 
 export class PinkCube {
   private app: Application
-  private levelIndex = 4
+  private levelIndex = 0
   private level?: Level
   private screenFlash: Sprite
   private screenCinema: Cinema

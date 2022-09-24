@@ -3,15 +3,20 @@ export interface Props {
 	title: string;
 	href: string;
 	image: string;
+	square?: boolean;
 }
 
-const { href, title, image } = Astro.props as Props;
+const { href, title, image, square } = Astro.props as Props;
+
+const className = `w-full ${
+	square ? "aspect-square" : "aspect-video"
+} mb-2 rounded shadow-2xl`;
 ---
 
 <div class="mb-8 break-inside-avoid hover:scale-105 transition-all">
 	<a href={href}>
-		<img src={image} class="w-full aspect-video mb-2 rounded shadow-2xl" />
-		<div class="text-center">
+		<img src={image} class={className} />
+		<div class="text-center text-lg">
 			{title}
 		</div>
 	</a>
