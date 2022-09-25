@@ -182,7 +182,7 @@ export class Car extends Container3D {
       this.playingSkidSound = undefined
     }
 
-    if (Math.abs(slideValue) > 0.2) {
+    if (Math.abs(slideValue) > 0.3) {
       if (!this.currentTrail1 || !this.currentTrail2) {
         this.currentTrail1 = this.trailRenderer.startTrail(
           0.1, behindWheel1, new Float32Array([0, 1, 0]), Math.abs(slideValue * 0.8))
