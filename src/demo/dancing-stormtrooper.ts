@@ -1,10 +1,12 @@
-import { Application, Renderer } from "pixi.js";
+import { Application, ENV, Renderer, settings } from "pixi.js";
 import { Camera, Color, glTFAsset, ImageBasedLighting, Light, LightingEnvironment, Mesh3D, Model, ShadowCastingLight, ShadowQuality, Sprite3D, StandardMaterial, StandardPipeline } from "pixi3d";
 
 export class DancingStormtrooper {
   private _app: Application
 
   constructor(view: HTMLCanvasElement, resizeTo?: HTMLElement) {
+    settings.PREFER_ENV = ENV.WEBGL2
+
     this._app = new Application({
       view,
       backgroundColor: 0xdddddd,
