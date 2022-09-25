@@ -16,6 +16,9 @@ export class AudioPlayer {
   }
 
   set masterVolume(value: number) {
+    if (value === this._masterVolume) {
+      return
+    }
     this._masterVolume = value
     for (let name in this.playing) {
       this.setVolume(name, this.playing[name].volume)
