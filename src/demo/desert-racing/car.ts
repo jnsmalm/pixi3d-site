@@ -40,8 +40,6 @@ export class Car extends Container3D {
 
     if (howl) {
       this.audioPlayer = new AudioPlayer(howl)
-      this.audioPlayer.play("car_skid_loop_1", { loop: true, volume: 0, muteOnBlur: true })
-      this.audioPlayer.play("car_skid_loop_2", { loop: true, volume: 0, muteOnBlur: true })
       this.audioPlayer.play("car_skid_loop_3", { loop: true, volume: 0, muteOnBlur: true })
       this.audioPlayer.play("car_skid_loop_4", { loop: true, volume: 0, muteOnBlur: true })
       this.audioPlayer.play("car_skid_loop_5", { loop: true, volume: 0, muteOnBlur: true })
@@ -176,6 +174,7 @@ export class Car extends Container3D {
       ][Random.integer(0, 2)]
     }
     if (this.playingSkidSound) {
+      this.audioPlayer?.play(this.playingSkidSound, { loop: true, volume: 0, muteOnBlur: true })
       this.audioPlayer?.setVolume(this.playingSkidSound, Math.abs(slideValue) * 1)
     }
     if (Math.abs(slideValue) < 0.1) {
@@ -239,6 +238,7 @@ export class Car extends Container3D {
     }
     this.speed = lerp(this.minSpeed, this.maxSpeed, this.speedPercent)
 
+    this.audioPlayer?.play("engine_loop", { loop: true, volume: 0.5, muteOnBlur: true })
     this.audioPlayer?.setRate("engine_loop", 1 + this.speedPercent * 0.3)
     this.audioPlayer?.setVolume("engine_loop", 0.5 - this.speedPercent * 0.25)
   }

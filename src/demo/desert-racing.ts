@@ -99,6 +99,10 @@ export class RetroRacing {
         "engine_loop": [
           21000,
           2500
+        ],
+        "music": [
+          25000,
+          47407.39229024943
         ]
       }
     })
@@ -282,7 +286,8 @@ export class RetroRacing {
   }
 
   onStart() {
-    this.audioPlayer.play("car_rev_1")
+    this.audioPlayer.play("car_rev_1", { startWhenSuspended: true })
+    this.audioPlayer.fadeVolume("music", 1)
     this.startScreen.flash()
     this.startScreen.transition(() => {
       this.startScreen.hide()
@@ -319,6 +324,7 @@ export class RetroRacing {
         this.showStartScreen()
       })
     }, 1000)
+    this.audioPlayer.fadeVolume("music", 0.5)
   }
 
   playStartScreenCarLoop() {
@@ -364,6 +370,11 @@ export class RetroRacing {
     // this.app.stage.addChild(new Grid())
 
     this.startScreen.createFlagModel(this.resources["/models/flag.glb"].gltf)
+
+    this.audioPlayer.play("music", {
+      loop: true, muteOnBlur: true, volume: 0, startWhenSuspended: true
+    })
+    this.audioPlayer.fadeVolume("music", 0.5, 2000)
 
     this.showStartScreen()
 
