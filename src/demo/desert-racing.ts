@@ -16,8 +16,9 @@ import { LapCounter } from "./desert-racing/lap-counter";
 import { FixedTimeStep } from "../components/FixedTimeStep";
 import { AudioPlayer } from "../components/AudioPlayer";
 import { Howl } from "howler";
+import { InfoScreen } from "./desert-racing/info-screen";
 
-enum GameState { startScreen, countDown, playing, finished }
+enum GameState { startScreen, countDown, info, playing, finished }
 
 export class RetroRacing {
   private app: Application
@@ -29,6 +30,7 @@ export class RetroRacing {
   private cpuCar: CpuCar
   private editor: Editor
   private control: CameraOrbitControl
+  private infoScreen: InfoScreen
   private startScreen: StartScreen
   private countDownScreen: CountDownScreen
   private lapCounter: LapCounter
@@ -51,6 +53,12 @@ export class RetroRacing {
     })
     this.resources = this.app.loader.resources
 
+    document.addEventListener("keydown", e => {
+      this.playerCar.accelerate = true
+    })
+    document.addEventListener("keyup", e => {
+      this.playerCar.accelerate = false
+    })
     document.addEventListener("pointerdown", e => {
       this.playerCar.accelerate = true
     })
@@ -121,10 +129,12 @@ export class RetroRacing {
     this.app.stage.sortableChildren = true
 
     this.startScreen = this.app.stage.addChild(new StartScreen(
-      this.app.renderer as Renderer, () => { this.onStart() }))
+      this.app.renderer as Renderer, () => { this.showInfo() }))
     this.countDownScreen = this.app.stage
       .addChild(new CountDownScreen(this.app.renderer as Renderer))
     this.lapCounter = this.app.stage.addChild(new LapCounter())
+    this.infoScreen = this.app.stage.addChild(new InfoScreen(
+      this.app.renderer as Renderer, () => { this.startCountDown() }))
   }
 
   async load() {
@@ -285,7 +295,7 @@ export class RetroRacing {
     this.editor?.setVisiblityForObjects(this.control.target)
   }
 
-  onStart() {
+  showInfo() {
     this.audioPlayer.play("car_rev_1", { startWhenSuspended: true })
     this.audioPlayer.fadeVolume("music", 1)
     this.startScreen.flash()
@@ -293,10 +303,16 @@ export class RetroRacing {
       this.startScreen.hide()
       this.resetCarsToStartingLine()
       this.startPlayerCarCameraTracking()
-      this.gameState = GameState.countDown
-      this.countDownScreen.show(() => {
-        this.start()
-      })
+      this.gameState = GameState.info
+      this.infoScreen.show()
+    })
+  }
+
+  startCountDown() {
+    this.infoScreen.hide()
+    this.countDownScreen.show(() => {
+      this.gameState = GameState.playing
+      this.start()
     })
   }
 
@@ -345,11 +361,15 @@ export class RetroRacing {
   }
 
   updateCars(elapsedTime: number) {
+    let updateCarPositions =
+      this.gameState === GameState.startScreen || 
+      this.gameState === GameState.playing || 
+      this.gameState === GameState.finished
     this.playerCar.update(
-      this.track, this.gameState !== GameState.countDown ? elapsedTime : 0);
+      this.track, updateCarPositions ? elapsedTime : 0);
     this.cpuCar.playerCarTotalDistance = this.playerCar.totalDistance
     this.cpuCar.update(
-      this.track, this.gameState !== GameState.countDown ? elapsedTime : 0)
+      this.track, updateCarPositions ? elapsedTime : 0)
   }
 
   show() {

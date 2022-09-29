@@ -5,14 +5,7 @@ import { Camera, Container3D, glTFAsset, Material, Model, PostProcessingSprite }
 export class StartScreen extends Container {
   private modelContainer: Container3D
   private model?: Model
-  private texts = [
-    "PRESS AND HOLD TO SPEED UP",
-    "RELEASE TO SLOW DOWN",
-    "STEERING IS ON AUTOMATIC"
-  ]
-  private textIndex = 0
   private startText: Text
-  private tipText: Text
   private ticker = new Ticker()
   private startButton: PostProcessingSprite
   private transitionOverlay: Graphics
@@ -53,21 +46,6 @@ export class StartScreen extends Container {
       padding: 30
     }))
     this.startText.anchor.set(0.5)
-
-    this.tipText = this.startButton.addChild(new Text("", {
-      fontFamily: "contrailone",
-      fontSize: 25,
-      fill: 0xffffff,
-      align: "center",
-      stroke: 0,
-      dropShadow: true,
-      dropShadowBlur: 15,
-      dropShadowAlpha: 1,
-      padding: 20
-    }))
-    this.tipText.anchor.set(0.5)
-    this.tipText.alpha = 0
-    this.tipText.position.y = 120
 
     this.flashOverlay = this.addChild(new Graphics())
     this.flashOverlay.beginFill(0xffffff)
@@ -110,8 +88,6 @@ export class StartScreen extends Container {
   }
 
   show() {
-    this.tipText.visible = true
-    this.tipText.alpha = 0
     this.startButton.interactive = true
     this.startButton.visible = true
 
@@ -126,26 +102,10 @@ export class StartScreen extends Container {
       this.flashOverlay.height = this.renderer.screen.height
     })
     this.ticker.start()
-
-    this.textTimeline = gsap.timeline({ repeat: -1 })
-    this.textTimeline.call(() => {
-      this.tipText.text = this.texts[this.textIndex]
-      this.tipText.scale.set(0.8)
-    })
-    this.textTimeline.to(this.tipText, { alpha: 1, duration: 0.2, delay: 1.5 })
-    this.textTimeline.to(this.tipText.scale, { x: 1, y: 1, duration: 0.5, delay: -0.2, ease: "back.out" })
-    this.textTimeline.to(this.tipText, { alpha: 0, duration: 0.2, delay: 2 })
-    this.textTimeline.call(() => {
-      this.textIndex = (this.textIndex + 1) % this.texts.length
-    })
   }
 
   hide() {
-    if (this.textTimeline) {
-      this.textTimeline.kill()
-    }
     this.startButton.visible = false
-    this.tipText.visible = false
   }
 
   flash() {
