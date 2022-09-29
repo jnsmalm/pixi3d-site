@@ -8,12 +8,12 @@ export interface Props {
 
 const { href, title, image, square } = Astro.props as Props;
 
-const className = `w-full ${
+const className = `hover:border-white border-2 border-cccccc w-full ${
 	square ? "aspect-square" : "aspect-video"
 } mb-2 rounded shadow-2xl`;
 ---
 
-<div class="mb-8 break-inside-avoid hover:scale-95 transition-all">
+<div class="mb-8 break-inside-avoid transition-all">
 	<a href={href}>
 		<img src={image} class={className} />
 		<div class="text-center text-lg">
