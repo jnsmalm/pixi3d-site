@@ -4,6 +4,6 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://test.pixi3d.org",
+  site: "https://pixi3d.org",
   integrations: [tailwind()]
 });
