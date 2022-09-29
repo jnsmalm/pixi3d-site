@@ -52,6 +52,11 @@ export class Level extends Container3D {
     this._allowControl = true
     this._stage.removeChildren()
 
+    this._buttons = []
+    this._gates = []
+    this._blocks = []
+    this._goals = []
+
     this._section.buttons.forEach(p => {
       this._buttons.push(this._stage.addChild(new Button(p.x, p.y, p.z)))
     })
