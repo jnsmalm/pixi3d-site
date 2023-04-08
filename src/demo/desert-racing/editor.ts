@@ -1,5 +1,5 @@
 import { Container, Texture } from "pixi.js";
-import { Camera, CameraOrbitControl, Container3D, glTFAsset, Plane, Vec3 } from "pixi3d";
+import { Camera, CameraOrbitControl, Container3D, glTFAsset, Plane, Point3D, Vec3 } from "pixi3d";
 import { EditorItem } from "./editor-item";
 
 import Data from "./level.json"
@@ -94,7 +94,7 @@ export class Editor extends Container {
     this.itemContainer.children.forEach(item => {
       let object = item as EditorItem
       let asset = this.assets.find(asset => asset.type === object.assetType)
-      let distance = Vec3.squaredDistance(object.worldTransform.position, targetPosition)
+      let distance = Vec3.squaredDistance(object.worldTransform.position.array, targetPosition)
       object.renderable = distance < asset!.visibiltyDistance || this.editMode
       if (object.renderable) {
         this._visibleObjectsCount++
@@ -121,7 +121,7 @@ export class Editor extends Container {
   }
 
   getGroundPosition(screenX: number, screenY: number) {
-    let plane = new Plane(new Float32Array([0, 1, 0]), 0)
+    let plane = new Plane(new Point3D(0, 1, 0), 0)
     let ray = Camera.main.screenToRay(screenX, screenY)
     if (ray) {
       let distance = plane.rayCast(ray)
@@ -131,7 +131,7 @@ export class Editor extends Container {
   }
 
   positionControlTargetCursor(x: number, y: number) {
-    let position = this.getGroundPosition(x, y)
+    let position = this.getGroundPosition(x, y)?.array
     if (position) {
       this.control.target = {
         x: position[0], y: position[1], z: position[2]
@@ -140,7 +140,7 @@ export class Editor extends Container {
   }
 
   positionCurrentItemAtCursor(x: number, y: number) {
-    let position = this.getGroundPosition(x, y)
+    let position = this.getGroundPosition(x, y)?.array
     if (position && this.currentItem) {
       this.currentItem.position.array = position
     }

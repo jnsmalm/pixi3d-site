@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import type { Howl } from "howler";
 import { Texture } from "pixi.js";
-import { Camera, Container3D, glTFAsset, Model, ObservablePoint3D, StandardMaterial, Vec3 } from "pixi3d";
+import { Camera, Container3D, glTFAsset, Model, Point3D, StandardMaterial, Vec3 } from "pixi3d";
 import { AudioPlayer } from "../../components/AudioPlayer";
 import { Random } from "../../components/Random";
 import type { Trail, TrailRenderer } from "../../components/TrailRenderer";
@@ -92,13 +92,13 @@ export class Car extends Container3D {
   getPerfectPositionDiff(track: Track) {
     let perfectPosition = track.getPositionAtDistance(this.totalDistance)
     return Vec3.magnitude(Vec3.subtract(
-      this.modelContainer.worldTransform.position, perfectPosition))
+      this.modelContainer.worldTransform.position.array, perfectPosition))
   }
 
   setRotationAtTrackDistance(track: Track) {
     let distance = this.totalDistance + 2 * Config.skid
     let position = track.getPositionAtDistance(distance, new Float32Array([this.offset, 0, 0]))
-    this.modelContainer.transform.lookAt(new ObservablePoint3D(() => { }, undefined,
+    this.modelContainer.transform.lookAt(new Point3D(
       position[0], position[1], position[2]))
   }
 
@@ -144,16 +144,16 @@ export class Car extends Container3D {
 
     this.updateTransform()
 
-    let behindWheel1 = Vec3.add(this.modelContainer.worldTransform.position,
-      Vec3.scale(this.modelContainer.worldTransform.backward, 0.2))
+    let behindWheel1 = Vec3.add(this.modelContainer.worldTransform.position.array,
+      Vec3.scale(this.modelContainer.worldTransform.backward.array, 0.2))
     Vec3.add(behindWheel1,
-      Vec3.scale(this.modelContainer.worldTransform.left, 0.2),
+      Vec3.scale(this.modelContainer.worldTransform.left.array, 0.2),
       behindWheel1)
 
-    let behindWheel2 = Vec3.add(this.modelContainer.worldTransform.position,
-      Vec3.scale(this.modelContainer.worldTransform.backward, 0.2))
+    let behindWheel2 = Vec3.add(this.modelContainer.worldTransform.position.array,
+      Vec3.scale(this.modelContainer.worldTransform.backward.array, 0.2))
     Vec3.add(behindWheel2,
-      Vec3.scale(this.modelContainer.worldTransform.right, 0.2),
+      Vec3.scale(this.modelContainer.worldTransform.right.array, 0.2),
       behindWheel2)
 
     if (Math.abs(slideValue) > 0.5) {

@@ -1,4 +1,4 @@
-import { Container3D, Mesh3D, ObservablePoint3D, Quat, Vec3 } from "pixi3d";
+import { Container3D, Mesh3D, Point3D, Quat, Vec3 } from "pixi3d";
 import { BezierCurve } from "./bezier-curve";
 import { TrackGeometry } from "./track-geometry";
 import { TrackMaterial } from "./track-material";
@@ -102,7 +102,7 @@ export class Track extends Container3D {
     ]
 
     let controlPoints = points.map(p => {
-      let point = new ObservablePoint3D(() => { }, undefined, p.x, p.y, p.z)
+      let point = new Point3D(p.x, p.y, p.z)
       point.array = Vec3.transformQuat(point.array, rotation)
       return point
     })
@@ -128,7 +128,7 @@ export class Track extends Container3D {
     ]
 
     let controlPoints = points.map(p => {
-      let point = new ObservablePoint3D(() => { }, undefined, p.x, p.y, p.z)
+      let point = new Point3D(p.x, p.y, p.z)
       point.array = Vec3.multiply(point.array, scaling)
       return point
     })
@@ -156,7 +156,7 @@ export class Track extends Container3D {
     ]
 
     let controlPoints = points.map(p => {
-      let point = new ObservablePoint3D(() => { }, undefined, p.x, p.y, p.z)
+      let point = new Point3D(p.x, p.y, p.z)
       point.array = Vec3.multiply(point.array, scaling)
       return point
     })

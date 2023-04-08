@@ -89,7 +89,7 @@ export class ShatteringStatue {
     let statue = this.createStatue(
       this.app.loader.resources["/models/statue.glb"].gltf)
     statue.interactive = true
-    statue.hitArea = PickingHitArea.fromObject(statue)
+    statue.hitArea = new PickingHitArea(statue)
     statue.on("pointerdown", () => {
       let pointer = document.getElementById("pointer")
       if (pointer) {

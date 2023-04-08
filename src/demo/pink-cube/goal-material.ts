@@ -17,7 +17,7 @@ export class GoalMaterial extends Material {
 
   updateUniforms(mesh: Mesh3D, shader: Shader) {
     shader.uniforms.u_Model = mesh.worldTransform.array
-    shader.uniforms.u_ViewProjection = Camera.main.viewProjection
+    shader.uniforms.u_ViewProjection = Camera.main.viewProjection.array
   }
 }
 

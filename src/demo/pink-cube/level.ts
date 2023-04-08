@@ -266,18 +266,18 @@ export class Level extends Container3D {
   }
 
   movePlayerLeft() {
-    this._movePlayer(Camera2.main.worldTransform.left)
+    this._movePlayer(Camera2.main.worldTransform.left.array)
   }
 
   movePlayerFoward() {
-    this._movePlayer(Camera2.main.worldTransform.forward)
+    this._movePlayer(Camera2.main.worldTransform.forward.array)
   }
 
   movePlayerBackward() {
-    this._movePlayer(Camera2.main.worldTransform.backward)
+    this._movePlayer(Camera2.main.worldTransform.backward.array)
   }
 
   movePlayerRight() {
-    this._movePlayer(Camera2.main.worldTransform.right)
+    this._movePlayer(Camera2.main.worldTransform.right.array)
   }
 }

@@ -15,7 +15,7 @@ export class WaterMatrial extends Material {
   }
 
   updateUniforms(mesh: Mesh3D, shader: Shader) {
-    shader.uniforms.u_ViewProjection = Camera.main.viewProjection
+    shader.uniforms.u_ViewProjection = Camera.main.viewProjection.array
     shader.uniforms.u_Model = mesh.worldTransform.array
     shader.uniforms.u_DepthTexture = this.depthTexture
     shader.uniforms.u_ColorTexture = this.colorPass.renderTexture
@@ -29,7 +29,7 @@ export class WaterMatrial extends Material {
     shader.uniforms.u_Depth = this.depth
     shader.uniforms.u_NormalStrength = 1;
     shader.uniforms.u_LightDirection = this.lightDirection
-    shader.uniforms.u_CameraPosition = Camera.main.worldTransform.position
+    shader.uniforms.u_CameraPosition = Camera.main.worldTransform.position.array
     shader.uniforms.u_CameraNear = Camera.main.near
     shader.uniforms.u_CameraFar = Camera.main.far
     shader.uniforms.u_WaveStrength = this.waveStrength

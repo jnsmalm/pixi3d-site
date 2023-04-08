@@ -258,7 +258,7 @@ export class TrailMaterial extends Material {
   }
 
   updateUniforms(mesh: Mesh3D, shader: Shader) {
-    shader.uniforms.u_ViewProjection = Camera.main.viewProjection
+    shader.uniforms.u_ViewProjection = Camera.main.viewProjection.array
     shader.uniforms.u_ColorA = this.colorA.rgb
     shader.uniforms.u_ColorB = this.colorB.rgb
     shader.uniforms.u_Texture = this.texture

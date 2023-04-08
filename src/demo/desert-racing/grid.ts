@@ -8,7 +8,7 @@ export class Grid extends Container3D {
     super()
 
     let material = Material.from(vert, frag, (mesh, shader) => {
-      shader.uniforms.u_ViewProjection = Camera.main.viewProjection
+      shader.uniforms.u_ViewProjection = Camera.main.viewProjection.array
       shader.uniforms.u_Model = mesh.worldTransform.array
     })
     material.drawMode = DRAW_MODES.LINES

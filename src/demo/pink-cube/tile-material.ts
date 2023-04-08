@@ -12,7 +12,7 @@ export class TileMaterial extends Material {
 
   updateUniforms(mesh: Mesh3D, shader: Shader) {
     shader.uniforms.u_Model = mesh.worldTransform.array
-    shader.uniforms.u_ViewProjection = Camera.main.viewProjection
+    shader.uniforms.u_ViewProjection = Camera.main.viewProjection.array
     shader.uniforms.u_Color = this.color.rgba
     shader.uniforms.u_Color2 = this.color2.rgba
     shader.uniforms.u_Alpha = this.alpha

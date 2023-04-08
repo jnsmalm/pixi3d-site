@@ -23,9 +23,9 @@ export class PlanarShadowsRenderPass {
     for (let mesh of meshes) {
       this.shader.uniforms.u_Model = mesh.worldTransform.array
       this.shader.uniforms.u_InversedModel = Mat4.invert(mesh.worldTransform.array)
-      this.shader.uniforms.u_ViewProjection = Camera.main.viewProjection
+      this.shader.uniforms.u_ViewProjection = Camera.main.viewProjection.array
       this.shader.uniforms.u_LightDir =
-        LightingEnvironment.main.lights[0].worldTransform.forward
+        LightingEnvironment.main.lights[0].worldTransform.forward.array
       this.shader.render(mesh, this.renderer, this.state)
     }
     gl.disable(gl.STENCIL_TEST)

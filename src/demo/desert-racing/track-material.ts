@@ -8,7 +8,7 @@ export class TrackMaterial extends Material {
   }
 
   updateUniforms(mesh: Mesh3D, shader: Shader) {
-    shader.uniforms.u_ViewProjection = Camera.main.viewProjection
+    shader.uniforms.u_ViewProjection = Camera.main.viewProjection.array
     shader.uniforms.u_TotalDistance = this.track.totalDistance
     shader.uniforms.u_Model = mesh.worldTransform.array
   }

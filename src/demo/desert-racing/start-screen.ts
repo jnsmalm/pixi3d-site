@@ -1,13 +1,13 @@
 import gsap from "gsap";
 import { BLEND_MODES, Container, Graphics, Rectangle, Renderer, Text, Ticker } from "pixi.js";
-import { Camera, Container3D, glTFAsset, Material, Model, PostProcessingSprite } from "pixi3d";
+import { Camera, Container3D, glTFAsset, Material, Model, CompositeSprite } from "pixi3d";
 
 export class StartScreen extends Container {
   private modelContainer: Container3D
   private model?: Model
   private startText: Text
   private ticker = new Ticker()
-  private startButton: PostProcessingSprite
+  private startButton: CompositeSprite
   private transitionOverlay: Graphics
   private flashOverlay: Graphics
   private textTimeline?: gsap.core.Timeline
@@ -20,7 +20,7 @@ export class StartScreen extends Container {
     this.modelContainer = new Container3D()
 
     this.startButton = this.addChild(
-      new PostProcessingSprite(renderer, {
+      new CompositeSprite(renderer, {
         objectToRender: this.modelContainer, width: 512, height: 512
       }))
     this.startButton.visible = false
@@ -72,7 +72,7 @@ export class StartScreen extends Container {
     })
 
     let material = Material.from(vert, frag, (mesh, shader) => {
-      shader.uniforms.u_ViewProjection = camera.viewProjection
+      shader.uniforms.u_ViewProjection = camera.viewProjection.array
       shader.uniforms.u_Time = time
       shader.uniforms.u_Model = mesh.worldTransform.array
     })

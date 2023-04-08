@@ -21,7 +21,7 @@ export class Water extends Container3D {
 
     Ticker.shared.add(() => {
       waterMaterial.time += Ticker.shared.elapsedMS / 1000
-      waterMaterial.lightDirection = directionalLight.worldTransform.forward
+      waterMaterial.lightDirection = directionalLight.worldTransform.forward.array
     })
   }
 }

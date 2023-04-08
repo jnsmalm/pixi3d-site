@@ -1,6 +1,6 @@
 import gsap from "gsap"
 import { DEG_TO_RAD } from "pixi.js"
-import { Color, Container3D, glTFAsset, LightingEnvironment, Mat4, Matrix4, Mesh3D, Model, StandardMaterial, Vec3 } from "pixi3d"
+import { Color, Container3D, glTFAsset, LightingEnvironment, Mat4, Matrix4x4, Mesh3D, Model, StandardMaterial, Vec3 } from "pixi3d"
 import type { Camera } from "./camera"
 
 export class Player extends Container3D {
@@ -40,9 +40,9 @@ export class Player extends Container3D {
 
   get worldPosition() {
     return {
-      x: this._mesh.worldTransform.position[0],
-      y: this._mesh.worldTransform.position[1],
-      z: this._mesh.worldTransform.position[2],
+      x: this._mesh.worldTransform.position.x,
+      y: this._mesh.worldTransform.position.y,
+      z: this._mesh.worldTransform.position.z,
     }
   }
 
@@ -137,7 +137,7 @@ export class Player extends Container3D {
         }
         Mat4.translate(matrix, Vec3.fromValues(dir.x, 1, -dir.z), matrix)
         Mat4.multiply(transformMatrix, matrix, matrix)
-        this._mesh.transform.setFromMatrix(new Matrix4(matrix))
+        this._mesh.transform.setFromMatrix(new Matrix4x4(matrix))
         if (cameraTrack) {
           this._camera.track(this.worldPosition)
         }

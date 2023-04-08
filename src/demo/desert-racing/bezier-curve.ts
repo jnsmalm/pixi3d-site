@@ -1,4 +1,4 @@
-import { Container3D, ObservablePoint3D, Vec3 } from "pixi3d"
+import { Container3D, Point3D, Vec3 } from "pixi3d"
 import { OrientedPoint } from "./oriented-point"
 
 export interface BezierCurveSample {
@@ -12,7 +12,7 @@ export class BezierCurve extends Container3D {
   private _totalDistance = 0
   private samples: BezierCurveSample[] = []
 
-  constructor(localControlPoints: ObservablePoint3D[]) {
+  constructor(localControlPoints: Point3D[]) {
     super()
 
     this.controlPoints = localControlPoints.map(p => {
@@ -37,7 +37,7 @@ export class BezierCurve extends Container3D {
 
   calculateTotalDistance(numberOfSamples: number) {
     let totalDistance = 0
-    let previousPosition = this.controlPoints[0].worldTransform.position
+    let previousPosition = this.controlPoints[0].worldTransform.position.array
     for (let i = 1; i < numberOfSamples; i++) {
       let t = i / (numberOfSamples - 1)
       let point = this.getPoint(t)
@@ -52,11 +52,11 @@ export class BezierCurve extends Container3D {
     let point = this.getPoint(0)
     let samples: BezierCurveSample[] = [{
       distance: 0,
-      position: this.controlPoints[0].worldTransform.position,
+      position: this.controlPoints[0].worldTransform.position.array,
       point: point
     }]
     let totalDistance = 0
-    let previousPosition = this.controlPoints[0].worldTransform.position
+    let previousPosition = this.controlPoints[0].worldTransform.position.array
     for (let i = 1; i < numberOfSamples; i++) {
       let t = i / (numberOfSamples - 1)
       let point = this.getPoint(t)
@@ -107,10 +107,10 @@ export class BezierCurve extends Container3D {
   }
 
   getPoint(t: number) {
-    let p0 = this.controlPoints[0].worldTransform.position
-    let p1 = this.controlPoints[1].worldTransform.position
-    let p2 = this.controlPoints[2].worldTransform.position
-    let p3 = this.controlPoints[3].worldTransform.position
+    let p0 = this.controlPoints[0].worldTransform.position.array
+    let p1 = this.controlPoints[1].worldTransform.position.array
+    let p2 = this.controlPoints[2].worldTransform.position.array
+    let p3 = this.controlPoints[3].worldTransform.position.array
 
     let a = Vec3.lerp(p0, p1, t)
     let b = Vec3.lerp(p1, p2, t)
